@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="JsonSerialization.Tests/JsonSerialization.Tests.csproj" />
+  <Project Path="JsonSerialization/JsonSerialization.csproj" />
+</Solution>
