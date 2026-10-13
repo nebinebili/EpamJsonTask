@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 [assembly: CLSCompliant(true)]
 
 namespace JsonSerialization;
@@ -6,37 +9,41 @@ public static class JsonSerializationOperations
 {
     public static string SerializeObjectToJson(object obj)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        return JsonSerializer.Serialize(obj);
     }
 
     public static T? DeserializeJsonToObject<T>(string json)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        return JsonSerializer.Deserialize<T>(json);
     }
 
     public static string SerializeCompanyObjectToJson(object obj)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        return JsonSerializer.Serialize(obj);
     }
 
     public static T? DeserializeCompanyJsonToObject<T>(string json)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        return JsonSerializer.Deserialize<T>(json);
     }
 
     public static string SerializeDictionary(Company obj)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(obj);
+
+        var options = new JsonSerializerOptions
+        {
+            DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+        };
+
+        return JsonSerializer.Serialize(obj.Domains, options);
     }
 
     public static string SerializeEnum(Company obj)
     {
-        // TODO Implement the method.
-        throw new NotImplementedException();
+        var options = new JsonSerializerOptions();
+        options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+
+        return JsonSerializer.Serialize(obj, options);
     }
 }
